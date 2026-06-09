@@ -1,0 +1,17 @@
+Package: tomio.xraytools
+Version: 0.1
+Date: 2024-03-13
+Title: X-ray Analysis Tools in R
+Authors@R: c(person("Tamás", "Haraszti",
+             role= c("aut", "cre"),
+             comment=c(ORCID="0000-0002-7095-4358")))
+Author: Tamás Haraszti [aut, cre]
+Maintainer: Tamás Haraszti <haraszti@dwi.rwth-aachen.de>
+Depends: R (>= 4.0.0), XML, tomio.signals
+Suggests:
+Description: A simple set of functions to analyze X-ray scattering data. There are two reader functions to import 'XRDML' and data files from the Xenocs systems (.dat extension, text data). Functions include tools to plot groups of files, also ones stitched together from SAXS and XRD (WAXS) data. Other tools are meant for background calculation, correction, peak finding.
+Encoding: UTF-8
+License: CC BY 4.0
+URL:
+BugReports:
+Config/roxygen2/version: 8.0.0
