@@ -5,7 +5,15 @@
 \title{take a variable name pattern and plot them as
 X-ray data sets using plot.xray().}
 \usage{
-\method{plot}{xray.group}(pattern, complement = TRUE, cols = NULL, alpha = 1, legends = NULL, ...)
+\method{plot}{xray.group}(
+  pattern,
+  complement = TRUE,
+  cols = NULL,
+  alpha = 1,
+  legends = NULL,
+  envir = .GlobalEnv,
+  ...
+)
 }
 \arguments{
 \item{pattern}{string, a pattern to get the variables via ls()
@@ -19,6 +27,8 @@ the names of variables to load (or a hit list)}
 \item{alpha}{numeric 0 - 1, a transparency value for generating colors}
 
 \item{legends}{string array, legends to be used}
+
+\item{envir}{environment, where to find the data}
 
 \item{...}{all further arguments are passed to plot.xray}
 }

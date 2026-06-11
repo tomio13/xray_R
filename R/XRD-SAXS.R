@@ -221,6 +221,7 @@ plot.xray.group <- function(pattern,
                             cols= NULL,
                             alpha= 1,
                             legends= NULL,
+                            envir= .GlobalEnv,
                             ...) {
     #' take a variable name pattern and plot them as
     #' X-ray data sets using plot.xray().
@@ -238,6 +239,7 @@ plot.xray.group <- function(pattern,
     #' @param cols  string array, name of colors to be used
     #' @param alpha numeric 0 - 1, a transparency value for generating colors
     #' @param legends    string array, legends to be used
+    #' @param envir     environment, where to find the data
     #' @param ... all further arguments are passed to plot.xray
     #'
     #' @export
@@ -245,12 +247,12 @@ plot.xray.group <- function(pattern,
     if (length(pattern) > 1) {
         lst <- pattern
     } else {
-        lst <- ls(pattern= pattern, envir= .GlobalEnv)
+        lst <- ls(pattern= pattern, envir= envir)
     }
 
     if (length(lst) < 1) {
         cat('pattern', pattern, 'not found\n')
-        return
+        return()
     }
 
     cat('found', length(lst), 'data sets\n')
@@ -268,7 +270,7 @@ plot.xray.group <- function(pattern,
     not.first <- FALSE
     for (i in seq_along(lst)) {
         n <- lst[i]
-        a <- get(n, envir= .GlobalEnv)
+        a <- get(n, envir= envir)
 
         n.2 <- NULL
         if (complement) {
@@ -279,8 +281,8 @@ plot.xray.group <- function(pattern,
             }
         }
         # cat('current names', n, '2:', n.2, '\n')
-        if (!is.null(n.2) && exists(n.2, envir= .GlobalEnv)) {
-            b <- get(n.2, envir= .GlobalEnv)
+        if (!is.null(n.2) && exists(n.2, envir= envir)) {
+            b <- get(n.2, envir= envir)
             # cat('plotting', n, 'c:', cols[i], '\n')
             plot.xray(a, b, add= not.first, col=cols[i], ...)
         } else {
@@ -446,7 +448,8 @@ read.xray.files <- function(folder='./',
                            filetype= c('dat', 'xrdml'),
                            prefix= '',
                            remove= '',
-                           recursive= FALSE
+                           recursive= FALSE,
+                           envir= .GlobalEnv
                            ) {
     #' read all data files from a folder and put them into the
     #' main memory.
@@ -465,6 +468,7 @@ read.xray.files <- function(folder='./',
     #' @param remove    text, remove this pattern from the file name
     #'                      during conversion to variable name
     #' @param recursive Boolean, whether the searhc should be recursive
+    #' @param envir     environment where to dump the results
     #'
     #' @return nothing
     #'
@@ -521,7 +525,7 @@ read.xray.files <- function(folder='./',
     # load the files
     for (i in seq_along(lst)){
         a <- reader(lst[i])
-        assign(namelst[i], a, envir=.GlobalEnv)
+        assign(namelst[i], a, envir= envir)
     }
     return()
 }

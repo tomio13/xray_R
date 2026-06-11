@@ -10,7 +10,8 @@ read.xray.files(
   filetype = c("dat", "xrdml"),
   prefix = "",
   remove = "",
-  recursive = FALSE
+  recursive = FALSE,
+  envir = .GlobalEnv
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ names with a dot}
 during conversion to variable name}
 
 \item{recursive}{Boolean, whether the searhc should be recursive}
+
+\item{envir}{environment where to dump the results}
 }
 \value{
 nothing
