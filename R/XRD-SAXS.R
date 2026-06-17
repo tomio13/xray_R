@@ -260,9 +260,14 @@ plot.xray.group <- function(pattern,
     if (is.null(cols)) {
         N <- length(lst)
         if (N > 5) {
-            cols= hcl.colors(N, 'RdYlBu', alpha= alpha)
+            cols<- hcl.colors(N, 'RdYlBu', alpha= alpha)
         } else {
-            cols = c('black', 'blue', 'green', 'red', 'orange')[1:N]
+            # add simple colors and alpha channel:
+            # only rgb can add the alpha channels,
+            # so we convert first to rgb then back
+            cols <- col2rgb(c('black', 'blue', 'green', 'red', 'orange')[1:N])/255
+            # rgb needs red, green, blue parameters separately
+            cols =  rgb(cols[1,], cols[2,], cols[3,], alpha= alpha)
         }
     }
     # cat('color values:', cols, '\n')
