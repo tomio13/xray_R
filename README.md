@@ -8,3 +8,6 @@ The two main resource here are:
 The smoothing, background correction and peak finding are part of a more general signal
 package 'tomio.signals'.
 
+The plotting funcitons are not meant as an extension of the plot() methode, because they focus
+on the specific type of x-ray data. It should not break anything, but it may raise a warning from
+the build tools.
